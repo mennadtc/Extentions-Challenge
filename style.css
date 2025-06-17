@@ -1,0 +1,209 @@
+:root {
+    --neutral-900: hsl(227, 75%, 14%);
+    --neutral-800: hsl(226, 25%, 17%);
+    --neutral-700: hsl(225, 23%, 24%);
+    --neutral-600: hsl(226, 11%, 37%);
+    --neutral-300: hsl(0, 0%, 78%);
+    --neutral-200: hsl(217, 61%, 90%);
+    --neutral-100: hsl(0, 0%, 93%);
+    --neutral-0: hsl(200, 60%, 99%);
+    --red-400: hsl(3, 86%, 64%);
+    --red-500: hsl(3, 71%, 56%);
+    --red-700: hsl(3, 77%, 44%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(180deg, var(--neutral-200) 0%, var(--neutral-100) 100%);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    font-family: Notosans, sans-serif;
+}
+
+.dark-mode {
+    background: linear-gradient(180deg, #040918 0%, #091540 100%);
+    color: var(--neutral-0);
+}
+
+
+header {
+    width: 75%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 34em;
+    border-radius: 20px;
+    background-color: hsla(0, 0%, 78%, 0.2);
+    padding: 10px 0;
+    position: relative;
+}
+
+.dark-mode svg.logo-text path[fill="#091540"] {
+    fill: var(--neutral-0);
+}
+
+.dark-mode .svg-moon-light {
+    display: none;
+}
+
+.svg-sun-dark {
+    cursor: pointer;
+    color: var(--neutral-0);
+}
+
+.svg-moon-light {
+    cursor: pointer;
+    color: var(--neutral-900);
+}
+
+.filter-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    margin: 20px 0;
+    gap: 2em;
+    /* position: sticky;
+    top: 10%;
+    z-index: 1; */
+}
+
+.filter-btns div {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--neutral-0);
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: hsla(0, 0%, 78%, 0.2);
+    border-radius: 20px;
+}
+
+.btn.activated {
+    background-color: var(--red-400);
+    color: var(--neutral-900);
+}
+
+#card-container {
+    width: 75%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 78%, 0.2);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7em;
+}
+
+.details {
+    font-size: 0.8em;
+    color: var(--neutral-300);
+    margin-top: 6px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.remove-btn {
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--neutral-0);
+    color: var(--neutral-0);
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 18px;
+    margin-left: -2px;
+}
+
+/* Hide default checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Style the custom slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--neutral-600);
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+/* Circle inside the slider */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+/* When the checkbox is checked */
+.switch input:checked+.slider {
+    background-color: var(--red-400);
+}
+
+.switch input:checked+.slider::before {
+    transform: translateX(22px);
+}
+
+
+.footer {
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 2em;
+    background: none;
+    margin-top: 2em;
+}
+
+.footer a {
+    color: var(--red-400);
+}
