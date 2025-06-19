@@ -19,19 +19,22 @@
 }
 
 body {
-    background: linear-gradient(180deg, var(--neutral-200) 0%, var(--neutral-100) 100%);
+    background: linear-gradient(180deg, var(--neutral-100) 0%, var(--neutral-0) 100%);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
     font-family: Notosans, sans-serif;
+    color: var(--neutral-900);
+}
+
+body.dark-mode{
+    background: linear-gradient(180deg, #040918 0%, #091540 100%);
 }
 
 .dark-mode {
-    background: linear-gradient(180deg, #040918 0%, #091540 100%);
-    color: var(--neutral-0);
+    color: var(--neutral-0) !important;
 }
-
 
 header {
     width: 75%;
@@ -41,27 +44,35 @@ header {
     align-items: center;
     gap: 34em;
     border-radius: 20px;
-    background-color: hsla(0, 0%, 78%, 0.2);
+    background-color: hsla(0, 0%, 93%, 0.2);
     padding: 10px 0;
     position: relative;
 }
 
-.dark-mode svg.logo-text path[fill="#091540"] {
-    fill: var(--neutral-0);
-}
-
-.dark-mode .svg-moon-light {
-    display: none;
-}
-
 .svg-sun-dark {
     cursor: pointer;
-    color: var(--neutral-0);
+    color: var(--neutral-900);
 }
 
 .svg-moon-light {
     cursor: pointer;
-    color: var(--neutral-900);
+    color: var(--neutral-0);
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+}
+
+.mode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.english, .arabic {
+    cursor: pointer;
 }
 
 .filter-btns {
@@ -71,9 +82,6 @@ header {
     width: 75%;
     margin: 20px 0;
     gap: 2em;
-    /* position: sticky;
-    top: 10%;
-    z-index: 1; */
 }
 
 .filter-btns div {
@@ -85,16 +93,16 @@ header {
     cursor: pointer;
     background: none;
     border: none;
-    color: var(--neutral-0);
+    color: var(--neutral-900);
     font-size: 16px;
     padding: 10px 20px;
-    background-color: hsla(0, 0%, 78%, 0.2);
+    background-color: hsla(0, 0%, 93%, 0.2);
     border-radius: 20px;
 }
 
 .btn.activated {
     background-color: var(--red-400);
-    color: var(--neutral-900);
+    color: var(--neutral-0);
 }
 
 #card-container {
@@ -109,9 +117,10 @@ header {
 .card {
     width: 100%;
     height: 100%;
-    background-color: hsla(0, 0%, 78%, 0.2);
+    background-color: hsla(0, 0%, 93%, 0.2);
     padding: 20px;
     border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
@@ -124,7 +133,7 @@ header {
 
 .details {
     font-size: 0.8em;
-    color: var(--neutral-300);
+    color: var(--neutral-600);
     margin-top: 6px;
 }
 
@@ -138,12 +147,16 @@ header {
 .remove-btn {
     cursor: pointer;
     background: none;
-    border: 1px solid var(--neutral-0);
-    color: var(--neutral-0);
+    border: 1px solid var(--neutral-900);
+    color: var(--neutral-900);
     font-size: 12px;
     padding: 8px 10px;
     border-radius: 18px;
     margin-left: -2px;
+}
+
+.remove-btn.dark-mode {
+    border: 1px solid var(--neutral-0);
 }
 
 /* Hide default checkbox */
@@ -164,7 +177,7 @@ header {
 .slider {
     position: absolute;
     cursor: pointer;
-    background-color: var(--neutral-600);
+    background-color: var(--neutral-300);
     border-radius: 34px;
     top: 0;
     left: 0;
@@ -194,7 +207,6 @@ header {
 .switch input:checked+.slider::before {
     transform: translateX(22px);
 }
-
 
 .footer {
     font-size: 11px;

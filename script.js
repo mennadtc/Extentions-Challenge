@@ -1,12 +1,22 @@
+// Constants for display styles
+const DISPLAY_BLOCK = 'block';
+const DISPLAY_NONE = 'none';
+
+// Function to determine the data file based on the language
+function getDataFile(lang) {
+    return lang === 'english' ? 'data.json' : 'data_ar.json';
+}
+
 // Function to fetch data from data.json and display it in cards
-async function displayDataInCards() {
+async function displayDataInCards(lang) {
     try {
         // Fetch data from data.json
-        const response = await fetch('data.json');
+        const response = await fetch(getDataFile(lang));
         const data = await response.json();
 
         // Get the container where cards will be added
         const cardContainer = document.getElementById('card-container');
+        cardContainer.innerHTML = '';
 
         // Loop through the data and create cards
         data.forEach(item => {
@@ -19,13 +29,13 @@ async function displayDataInCards() {
                     <img src="${item.logo}" alt="${item.name}">
                     <div class="card-text">
                         <h3>${item.name}</h3>
-                        <div class="details">${item.description}</div>
+                        <div class="details dark-mode">${item.description}</div>
                     </div>
                 </div>
                 <div class="actions">
-                    <button class="remove-btn">Remove</button>
+                    <button class="remove-btn dark-mode">Remove</button>
                     <label class="switch">
-                        <input type="checkbox" ${item.isActive ? 'checked' : ''} />
+                        <input type="checkbox" ${item.isActive === true ? 'checked' : ''} />
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -35,12 +45,34 @@ async function displayDataInCards() {
             cardContainer.appendChild(card);
         });
     } catch (error) {
-        console.error('Error fetching or displaying data:', error);
+        console.error('Error occurred while fetching data or rendering cards. Details:', error);
     }
 }
 
 // Call the function to display data when the page loads
-document.addEventListener('DOMContentLoaded', displayDataInCards);
+document.addEventListener('DOMContentLoaded', () => {
+    const arabic = document.querySelector('.arabic');
+    const english = document.querySelector('.english');
+    const sunIcon = document.querySelector('.svg-sun-dark');
+    const moonIcon = document.querySelector('.svg-moon-light');
+    const body = document.body;
+    
+    // check if there is lang-activated class make it the other class in the list
+    if (document.querySelector('.english').classList.contains('lang-active')) {
+        lang = 'english';  
+        arabic.style.display = 'none';
+        english.style.display = 'block';
+    } else {
+        lang = 'arabic';
+        arabic.style.display = 'block';
+        english.style.display = 'none';
+    }
+    displayDataInCards(lang)
+    sunIcon.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
+    moonIcon.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
+});
+
+
 
 // Function to remove a card when the remove button is clicked
 document.addEventListener('click', function(event) {
@@ -50,29 +82,75 @@ document.addEventListener('click', function(event) {
             card.remove();
         }
     }
+    // condition to switch between languages
+    if (event.target.classList.contains('arabic')) {
+        displayDataInCards('english');
+        document.querySelector('.arabic').style.display = 'none';
+        document.querySelector('.english').style.display = 'block';
+    } else if (event.target.classList.contains('english')) {
+        displayDataInCards('arabic');
+        document.querySelector('.arabic').style.display = 'block';
+        document.querySelector('.english').style.display = 'none';
+    }
 });
 
-// to discuss
+
 // function to filter if it's active or inactive or all
 function filterCards(status) {
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         const checkbox = card.querySelector('input[type="checkbox"]');
-        if (status === 'all' || (status === 'active' && checkbox.checked) || (status === 'inactive' && !checkbox.checked)) {
-            card.style.display = 'block';
+        const isAll = status === 'all';
+        const active = status === 'active';
+        const inactive = status === 'inactive';
+        if (isAll || active && checkbox.checked || inactive && !checkbox.checked) {
+            card.style.display = DISPLAY_BLOCK;
         } else {
-            card.style.display = 'none';
+            card.style.display = DISPLAY_NONE;
         }
     });
 }
 
-// Event listener for filter buttons
-document.querySelectorAll('.filter-btns').forEach(button => {
+// Iterate over buttons and add event listeners
+document.querySelectorAll('.filter-btns .choices .btn').forEach(button => {
     button.addEventListener('click', () => {
+        // Remove 'activated' class from all buttons
+        document.querySelectorAll('.filter-btns .choices .btn').forEach(btn => btn.classList.remove('activated'));
+        
+        // Add 'activated' class to the clicked button
+        button.classList.add('activated');
+        
+        // Get the status from the clicked button and filter cards
         const status = button.getAttribute('data-status');
         filterCards(status);
     });
 });
 
+// function to switch btween light and dark mode
+function toggleTheme() {
+    const body = document.body;
+    const sunIcon = document.querySelector('.svg-sun-dark');
+    const moonIcon = document.querySelector('.svg-moon-light');
 
-// function to activate the filter btns
+    body.classList.toggle('dark-mode');
+    const elements = document.querySelectorAll('*');
+    elements.forEach(element => {
+        if(element.tagName.toLowerCase() === 'body'){
+            return;
+        }
+        else {
+            element.classList.toggle('dark-mode');
+        }
+    });
+    sunIcon.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
+    moonIcon.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
+}
+
+// Add event listener for theme toggle button
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+/// responsive + light mode modifications + translation
+// const arabic = document.querySelector('.arabic');
+// const english = document.querySelector('.english');
+// arabic.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
+// english.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';

@@ -1,0 +1,74 @@
+[
+    {
+        "logo": "./assets/images/logo-devlens.svg",
+        "name": "عدسة المطور",
+        "description": "قم بفحص تخطيطات الصفحات بسرعة وتصور حدود العناصر.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-style-spy.svg",
+        "name": "جاسوس الأنماط",
+        "description": "قم بتحليل ونسخ CSS من أي عنصر في صفحة الويب فورًا.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-speed-boost.svg",
+        "name": "تعزيز السرعة",
+        "description": "يحسن استخدام موارد المتصفح لتسريع تحميل الصفحات.",
+        "isActive": false
+    },
+    {
+        "logo": "./assets/images/logo-json-wizard.svg",
+        "name": "ساحر JSON",
+        "description": "يقوم بتنسيق والتحقق وتحسين استجابات JSON داخل المتصفح.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-tab-master-pro.svg",
+        "name": "مايسترو التبويبات",
+        "description": "ينظم تبويبات المتصفح في مجموعات وجلسات.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-viewport-buddy.svg",
+        "name": "رفيق العرض",
+        "description": "يحاكي دقة شاشات مختلفة مباشرة داخل المتصفح.",
+        "isActive": false
+    },
+    {
+        "logo": "./assets/images/logo-markup-notes.svg",
+        "name": "ملاحظات الترميز",
+        "description": "يتيح التعليقات التوضيحية والملاحظات مباشرة على صفحات الويب لتصحيح الأخطاء بشكل تعاوني.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-grid-guides.svg",
+        "name": "أدلة الشبكة",
+        "description": "قم بتراكب شبكات وأدلة محاذاة قابلة للتخصيص على أي صفحة ويب.",
+        "isActive": false
+    },
+    {
+        "logo": "./assets/images/logo-palette-picker.svg",
+        "name": "منتقي الألوان",
+        "description": "يستخرج لوحات الألوان من أي صفحة ويب فورًا.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-link-checker.svg",
+        "name": "مدقق الروابط",
+        "description": "يفحص ويبرز الروابط المعطلة على أي صفحة.",
+        "isActive": true
+    },
+    {
+        "logo": "./assets/images/logo-dom-snapshot.svg",
+        "name": "لقطة DOM",
+        "description": "التقاط وتصدير هياكل DOM بسرعة.",
+        "isActive": false
+    },
+    {
+        "logo": "./assets/images/logo-console-plus.svg",
+        "name": "كونسول بلس",
+        "description": "وحدة تحكم مطور محسنة مع تصفية وتسجيل متقدم.",
+        "isActive": true
+    }
+]
