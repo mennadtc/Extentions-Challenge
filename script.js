@@ -10,6 +10,9 @@ function getDataFile(lang) {
 // Function to fetch data from data.json and display it in cards
 async function displayDataInCards(lang) {
     try {
+        // Store the selected language in localStorage
+        localStorage.setItem('lang', lang);
+
         // Fetch data from data.json
         const response = await fetch(getDataFile(lang));
         const data = await response.json();
@@ -56,20 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunIcon = document.querySelector('.svg-sun-dark');
     const moonIcon = document.querySelector('.svg-moon-light');
     const body = document.body;
-    
+    const lang = localStorage.getItem('lang') || 'english';
+    const langText = document.querySelector('.lang-text');
     // check if there is lang-activated class make it the other class in the list
-    if (document.querySelector('.english').classList.contains('lang-active')) {
-        lang = 'english';  
-        arabic.style.display = 'none';
-        english.style.display = 'block';
+    if (lang === 'english') {
+        langText.textContent = 'En';
+        // arabic.style.display = 'none';
+        // english.style.display = 'block';
     } else {
-        lang = 'arabic';
-        arabic.style.display = 'block';
-        english.style.display = 'none';
+        langText.textContent = 'Ar';
+        // arabic.style.display = 'block';
+        // english.style.display = 'none';
     }
+
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        body.classList.add('dark-mode');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    }
+    else {
+        body.classList.remove('dark-mode');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    }
+
+    // Default to English if no language is set
     displayDataInCards(lang)
-    sunIcon.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
-    moonIcon.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
 });
 
 
@@ -83,14 +99,14 @@ document.addEventListener('click', function(event) {
         }
     }
     // condition to switch between languages
-    if (event.target.classList.contains('arabic')) {
-        displayDataInCards('english');
-        document.querySelector('.arabic').style.display = 'none';
-        document.querySelector('.english').style.display = 'block';
-    } else if (event.target.classList.contains('english')) {
-        displayDataInCards('arabic');
-        document.querySelector('.arabic').style.display = 'block';
-        document.querySelector('.english').style.display = 'none';
+    if (event.target.classList.contains('lang-text')) {
+        if (event.target.textContent === 'En') {
+            event.target.textContent = 'Ar';
+            displayDataInCards('english');
+        } else {
+            event.target.textContent = 'En';
+            displayDataInCards('arabic');
+        }
     }
 });
 
@@ -131,26 +147,13 @@ function toggleTheme() {
     const body = document.body;
     const sunIcon = document.querySelector('.svg-sun-dark');
     const moonIcon = document.querySelector('.svg-moon-light');
-
+    
     body.classList.toggle('dark-mode');
-    const elements = document.querySelectorAll('*');
-    elements.forEach(element => {
-        if(element.tagName.toLowerCase() === 'body'){
-            return;
-        }
-        else {
-            element.classList.toggle('dark-mode');
-        }
-    });
+
     sunIcon.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
     moonIcon.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
+    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
 }
 
 // Add event listener for theme toggle button
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-
-/// responsive + light mode modifications + translation
-// const arabic = document.querySelector('.arabic');
-// const english = document.querySelector('.english');
-// arabic.style.display = body.classList.contains('dark-mode') ? 'block' : 'none';
-// english.style.display = body.classList.contains('dark-mode') ? 'none' : 'block';
