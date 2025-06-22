@@ -24,29 +24,54 @@ body {
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    font-family: Notosans, sans-serif;
+    font-family: "Noto Sans", sans-serif;
     color: var(--neutral-900);
+    /* Ensures the browser uses dark mode styling for scrollbars and other UI elements */
+    color-scheme: dark;
 }
 
-body.dark-mode{
+body.dark-mode {
     background: linear-gradient(180deg, #040918 0%, #091540 100%);
+    color: var(--neutral-0);
+} 
+
+body.dark-mode .remove-btn{
+    color: var(--neutral-0);
+    border-color: var(--neutral-0);
 }
 
-.dark-mode {
-    color: var(--neutral-0) !important;
+body.dark-mode .filter-btns .btn{
+    color: var(--neutral-0);
+}
+
+body.dark-mode .filter-btns .btn.activated{
+    color: var(--neutral-900) !important;
+}
+
+body.dark-mode svg.logo-text path{
+    fill: var(--neutral-0);
+}
+
+body.dark-mode .details {
+    color: var(--neutral-300);
+}
+
+body.dark-mode svg.logo-text g path{
+    fill: var(--red-700);
 }
 
 header {
-    width: 75%;
+    max-width: 75rem;
     margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 34em;
+    gap: 40%;
     border-radius: 20px;
     background-color: hsla(0, 0%, 93%, 0.2);
     padding: 10px 0;
     position: relative;
+    width: 100%;
 }
 
 .svg-sun-dark {
@@ -58,11 +83,11 @@ header {
     cursor: pointer;
     color: var(--neutral-0);
 }
-
 #theme-toggle {
     background: none;
     border: none;
 }
+
 
 .mode {
     display: flex;
@@ -71,7 +96,8 @@ header {
     gap: 1em;
 }
 
-.english, .arabic {
+.english,
+.arabic {
     cursor: pointer;
 }
 
@@ -100,11 +126,11 @@ header {
     border-radius: 20px;
 }
 
+/* The activated button uses a red background color to indicate its active state */
 .btn.activated {
     background-color: var(--red-400);
     color: var(--neutral-0);
 }
-
 #card-container {
     width: 75%;
     height: 100%;
@@ -113,6 +139,13 @@ header {
     gap: 20px;
     padding: 0;
 }
+
+@media (max-width: 400px) {
+    #card-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
 
 .card {
     width: 100%;
@@ -128,7 +161,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.7em;
+    gap: 2em;
 }
 
 .details {
@@ -141,7 +174,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .remove-btn {
@@ -155,9 +188,7 @@ header {
     margin-left: -2px;
 }
 
-.remove-btn.dark-mode {
-    border: 1px solid var(--neutral-0);
-}
+
 
 /* Hide default checkbox */
 .switch input {
@@ -208,6 +239,7 @@ header {
     transform: translateX(22px);
 }
 
+/* Footer section for displaying additional information or links at the bottom of the page */
 .footer {
     font-size: 11px;
     text-align: center;
