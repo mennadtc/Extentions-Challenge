@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const langText = document.querySelector('.lang-text');
     // check if there is lang-activated class make it the other class in the list
     if (lang === 'english') {
-        langText.textContent = 'En';
+        langText.textContent = 'Ar';
         // arabic.style.display = 'none';
         // english.style.display = 'block';
     } else {
-        langText.textContent = 'Ar';
+        langText.textContent = 'En';
         // arabic.style.display = 'block';
         // english.style.display = 'none';
     }
